@@ -8,10 +8,14 @@ public class Cipher {
 	
 	private ArrayList<Character> alphabet;
 	
+	
 	public Cipher(){
 		this.alphabet=this.createAlphabet();
 	}
 	
+	/*
+	 * Encryption function
+	 */
 	public String encryptText(String plainText, String key){
 		String filledText = addFilling(plainText,key);
 		ArrayList<String> blocked = makeBlocks(filledText,key);
@@ -22,6 +26,9 @@ public class Cipher {
 		return encryptedText;
 	}
 	
+	/*
+	 * Decryption function
+	 */
 	public String decryptText(String encryptedText, String key){
 		ArrayList<String> deBlocks = new ArrayList<String>();
 		deBlocks = makeBlocks(encryptedText,key);
@@ -30,6 +37,9 @@ public class Cipher {
 		return decryptedText;
 	}
 	
+	/*
+	 * Generates the initial alphabet
+	 */
 	private ArrayList<Character> createAlphabet(){
 		ArrayList<Character> alph = new ArrayList<Character>();
 		
@@ -42,15 +52,23 @@ public class Cipher {
 		return alph;
 	}
 	
+	/*
+	 * Pading is added to the plain test
+	 */
 	private String addFilling(String plainText, String key){
 		int originalTextLength = plainText.length();
-		for (int j=0;j<(key.length()-(originalTextLength%key.length()));j++){
-			plainText += '#';
+		if(originalTextLength % key.length() != 0){
+			for (int j=0;j<(key.length()-(originalTextLength%key.length()));j++){
+				plainText += '#';
+			}
 		}
 		System.out.println("After padding added : "+plainText);
 		return plainText;
 	} 
 	
+	/*
+	 * Plain text is broken into blocks of fixed length
+	 */
 	private ArrayList<String> makeBlocks(String plainText, String key){
 		ArrayList<String> blocks = new ArrayList<String>();
 		for (int k = 0; k < plainText.length(); k += key.length()) {
@@ -60,6 +78,9 @@ public class Cipher {
 		return blocks;
 	} 
 	
+	/*
+	 * Blocks are interleaved
+	 */
 	private ArrayList<String> transposeBlocks(ArrayList<String> blocks){
 		ArrayList <String> shuffledBlocks = new ArrayList <String>();
 		for (int evenBlock=0; evenBlock<blocks.size(); evenBlock += 2){
@@ -72,6 +93,9 @@ public class Cipher {
 		return shuffledBlocks;
 	}
 	
+	/*
+	 * Rearranges interleaved blocks
+	 */
 	private ArrayList<String> retransposeBlocks(ArrayList<String> blocks){
 		ArrayList <String> arrangedBlocks = new ArrayList <String>();
 		List<String> part1 = new ArrayList <String>();
@@ -95,6 +119,10 @@ public class Cipher {
 		return arrangedBlocks;
 	}
 	
+	/*
+	 * Each character in the text is transposed to a mapping character from the alphabet.
+	 * Mapping character for each character is generated using key and alphabet.
+	 */
 	private String transposeChars(ArrayList<String> shuffledBlocks,String key){
 		String encryptedText = "";
 		for (Iterator<String> i = shuffledBlocks.iterator(); i.hasNext();) {
@@ -110,6 +138,9 @@ public class Cipher {
 		return encryptedText;
 	}
 	
+	/*
+	 * Inverts the transposing function
+	 */
 	private String retransposeChars(ArrayList<String> blocks,String key){
 		String decryptedText = "";
 		for (Iterator<String> i = blocks.iterator(); i.hasNext();) {

@@ -72,18 +72,18 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 481, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		final JLabel pathLabel = new JLabel();
 		pathLabel.setText("(Select a text file)");
-		pathLabel.setBounds(110, 67, 314, 49);
+		pathLabel.setBounds(110, 67, 345, 49);
 		frame.getContentPane().add(pathLabel);
 		
 		JLabel lblProductCipher = new JLabel("Product Cipher ");
 		lblProductCipher.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblProductCipher.setBounds(147, 28, 121, 28);
+		lblProductCipher.setBounds(171, 28, 121, 28);
 		frame.getContentPane().add(lblProductCipher);
 		
 		JButton btnNewButton = new JButton("Choose File");
@@ -97,7 +97,6 @@ public class MainWindow {
 					System.out.println(fc.getSelectedFile().getAbsolutePath());
 					pathLabel.setText(fc.getSelectedFile().getAbsolutePath());
 					filePath = fc.getSelectedFile();
-					
 				}
 			}
 		});
@@ -163,7 +162,7 @@ public class MainWindow {
 					}
 				}
 		}});
-		btnNewButton_2.setBounds(100, 211, 89, 23);
+		btnNewButton_2.setBounds(100, 211, 111, 23);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Decrypt");
@@ -221,7 +220,7 @@ public class MainWindow {
 				}
 			}
 		});
-		btnNewButton_3.setBounds(251, 211, 89, 23);
+		btnNewButton_3.setBounds(275, 211, 104, 23);
 		frame.getContentPane().add(btnNewButton_3);
 		
 		
